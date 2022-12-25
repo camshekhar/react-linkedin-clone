@@ -29,6 +29,7 @@ const Right = styled.div`
 const Feed = () => {
   document.title = "Feed | LinkedIn Clone";
   
+  const username = localStorage.getItem('username');
   return (
     <>
       <Container>
@@ -36,7 +37,7 @@ const Feed = () => {
         <FeedContainer>
           <Left></Left>
           <Center>
-            <h1>...Comming Soon...</h1>
+            <h1>Welcome, {username}!</h1>
           </Center>
           <Right></Right>
         </FeedContainer>

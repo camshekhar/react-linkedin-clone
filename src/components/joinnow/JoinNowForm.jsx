@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../../responsive";
+import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -127,7 +128,52 @@ const Links = styled.span`
     text-decoration: underline;
   }
 `;
+
+const ErrAlert = styled.span`
+  padding: 0.4rem;
+  background-color: #f91010df;
+  color: white;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 5px;
+  border-radius: 50px;
+`
 const JoinNowForm = () => {
+  
+  const [message, setmessage] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = (e) =>{
+      e.preventDefault();
+
+      const data = new FormData(e.currentTarget);
+
+      const actualData = {
+        username: data.get('username'),
+        password: data.get('password'),
+      }
+
+      if(actualData.username !== "" && actualData.password !== ""){
+        if(actualData.username !== localStorage.getItem('username')){
+            localStorage.setItem("username", actualData.username);
+            localStorage.setItem("password", actualData.password);
+            navigate('/login');
+            setmessage("Successfully Registered!");
+            
+        }else{
+            document.getElementById('registration-form').reset();
+            setmessage("This User Already Exists!");
+            navigate('/signup')
+           
+        }
+      }else{
+        setmessage("Kindly Enter Details to proceed!");
+        navigate('/signup')
+        console.log(message);    
+    }
+
+      
+  }
+
   return (
     <>
       <Container>
@@ -135,17 +181,18 @@ const JoinNowForm = () => {
         <FormContainer>
         <HeadingM>Join LinkedIn now - it's free!</HeadingM>
 
-          <Form>
+          <Form id="registration-form" onSubmit={handleSubmit}>
+            {message ? <ErrAlert>*** {message} ***</ErrAlert> : ""}
             <Label>Email or phone number</Label>
-            <Email type="text" />
+            <Email type="text" name="username" />
             <Label>Password (6 or more characters)</Label>
-            <Password type="password" />
+            <Password type="password" name="password" />
             <Agreement>
               By clicking Agree & join, you agree to the LinkedIn User
               Agreement, Privacy Policy, and Cookie Policy.
             </Agreement>
-            <JoinBtn>Agree & Join</JoinBtn>
-            <Continue>Continue</Continue>
+            <JoinBtn type="submit">Agree & Join</JoinBtn>
+            <Continue type="submit">Continue</Continue>
             <Hr />
             <LoginSection>
               Already on LinkedIn?{" "}

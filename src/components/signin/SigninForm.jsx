@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../../responsive";
 
@@ -129,18 +130,65 @@ const Links = styled.span`
   }
 `;
 
+const ErrAlert = styled.span`
+  padding: 0.4rem;
+  background-color: #f91010df;
+  color: white;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 5px;
+  border-radius: 50px;
+`
+
 const SigninForm = () => {
+
+  const [message, setmessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+
+    const loginData = {
+      username: data.get('username'),
+      password: data.get('password'),
+    }
+
+    if(loginData.username !== "" && loginData.password !== ""){
+       if(loginData.username === localStorage.getItem('username') && loginData.password === localStorage.getItem('password')){
+          navigate('/feed');
+          setmessage("Login Success!");
+          console.log(message);
+
+       }
+       else if(loginData.username === localStorage.getItem('username') && loginData.password !== localStorage.getItem('password')){
+          setmessage("Invalid Password!");
+          console.log("Invalid Password!");
+       }
+       else{
+          setmessage("Invalid Credentials!");
+          console.log("Invalid Credentials!");
+
+       }
+    }else{
+      navigate('/login');
+      setmessage("Please Enter Credentials!");
+      console.log("Please Enter Credentials!");
+    }
+
+  }
   return (
     <>
       <Container>
         <FormContainer>
           <Heading>Sign in</Heading>
           <Message>Stay updated on your professional world</Message>
-          <Form>
-            <Email type="text" placeholder="Email or Phone" />
-            <Password type="password" placeholder="Password" />
+          <Form id="login-form" onSubmit={handleSubmit}>
+            {message ? <ErrAlert>*** {message} ***</ErrAlert> : ""}
+            <Email type="text" placeholder="Email or Phone" name="username" />
+            <Password type="password" placeholder="Password" name="password" />
             <ForgotPassword>Forgot password?</ForgotPassword>
-            <Link to="/feed"><SiginBtn>Sign in</SiginBtn></Link>
+            <SiginBtn type="submit">Sign in</SiginBtn>
             <Hr />
             <SignupSection>
               New to LinkedIn?{" "}
