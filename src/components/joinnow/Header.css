@@ -1,0 +1,22 @@
+.jn-logo {
+  color: #065db4eb;
+  font-weight: 700;
+  font-size: 2.1rem;
+  margin-left: 12rem;
+  text-decoration: none;
+}
+.linkedin-icon {
+  margin-bottom: -5px;
+  margin-left: 2px;
+}
+@media only screen and (max-width: 600px) {
+  .jn-logo {
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-left: 0.5rem;
+    padding-top: 1rem;
+  }
+  .linkedin-icon {
+    margin-bottom: -2px;
+  }
+}

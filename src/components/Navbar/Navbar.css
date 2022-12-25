@@ -1,0 +1,77 @@
+.logo {
+  flex: 1;
+  color: #065db4eb;
+  font-weight: 700;
+  font-size: 2.1rem;
+  margin-left: 12rem;
+  align-items: center;
+  text-decoration: none;
+}
+.linkedin-icon {
+  margin-bottom: -5px;
+  margin-left: 2px;
+}
+@media only screen and (max-width: 600px) {
+  .logo {
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-left: 1rem;
+  }
+  .linkedin-icon {
+    margin-bottom: -2px;
+  }
+}
+
+.discover {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.671);
+  font-weight: 400;
+  align-items: center;
+}
+.discover:hover {
+ color: black;
+}
+
+.people {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.671);
+  font-weight: 400;
+  align-items: center;
+}
+
+.people:hover {
+  color: black;
+ }
+
+.learning {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.671);
+  font-weight: 400;
+  align-items: center;
+}
+
+.learning:hover {
+  color: black;
+ }
+
+.job {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.671);
+  font-weight: 400;
+  align-items: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif,
+    sans-serif, sans-serif;
+}
+
+.job:hover {
+  color: black;
+ }
